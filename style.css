@@ -1,7 +1,5 @@
-@import url('https://googleapis.com');
-
 h1, h2, #instruction-text {
-    font-family: 'VT323', monospace;
+    font-family: 'Press Start 2P', monospace;
     font-weight: 400;
 }
 
@@ -11,7 +9,7 @@ body {
     justify-content: center;
     height:100vh;
     margin: 0;
-    font-family: 'VT323', monospace;
+    font-family: 'Press Start 2P', sans-serif;
     font-weight: 400;
 }
 
@@ -43,4 +41,52 @@ body, .snake {
     border:#8b966c solid 30px;
     border-radius: 20px;
     box-shadow: inset 0 0 0 5px #8b966c;
+}
+
+#instruction-text {
+    position: absolute;
+    top: 60%;
+    color: #333;
+    width: 300px;
+    text-align: center;
+    text-transform: capitalize;
+    padding: 30px;
+    margin: 0;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-between;
+}
+
+#score {
+    color: #abb78a;
+}
+
+#score, #highScore {
+    font-size: 40px;
+    font-weight: bolder;
+    margin: 10px 0;
+}
+
+#highScore {
+    color: #d8ddca;
+    display: none;
+}
+
+.game-border-3 #logon {
+    background-color: #c4cfac;
+}
+
+.snake {
+    border: #5a5a5a 1px dotted;
+}
+
+.food {
+    background-color: #dedede;
+    border: #999 5px solid;
+}
+
+#logo {
+    position: absolute;
 }

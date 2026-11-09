@@ -1,11 +1,16 @@
 // Define HTML elements 
-const board = document.getElementById('game-board')
+const board = document.getElementById('game-board');    
+const instructionText = document.getElementById('instruction-text');
+const logo = document.getElementById('logo');
 
 // Define game variables 
 const gridSize = 20;
 let snake = [{ x: 10, y: 10}];
 let food = generateFood();
 let direction = 'right';
+let gameInterval;
+let gameSpeedDelay = 200;
+let gameStarted = false;
 
 // Draw game map, snake, food 
 function draw() {
@@ -17,8 +22,8 @@ function draw() {
 // Draw Snake 
 function drawSnake() {
     snake.forEach((segment) => {
-        const snakeElement = creatGameElement('div','snake')
-        setPosition(snakeElement, segment)
+        const snakeElement = createGameElement('div', 'snake');
+        setPosition(snakeElement, segment);
         board.appendChild(snakeElement);
     });
 }
@@ -37,7 +42,7 @@ function setPosition(element, position) {
 }
 
 // Testing draw function
-// draw {};
+// draw ();
 
 // Draw food function
 function drawFood() {
@@ -48,14 +53,14 @@ function drawFood() {
 
 // Genarate food
 function generateFood() {
-    const x = Math.floor(Math.random * gridSize) + 1;
-    const y = Math.floor(Math.random * gridSize) + 1;
+    const x = Math.floor(Math.random() * gridSize) + 1;
+    const y = Math.floor(Math.random() * gridSize) + 1;
     return{ x, y };
 }
 
 // Moving the State
 function move() {
-    const head = { ...snake[0]}
+    const head = { ...snake[0]};
     switch (direction) {
         case 'up':
             head.y--;         
@@ -71,7 +76,72 @@ function move() {
             break;
     }
 
-    snake.unshift(head)
+    snake.unshift(head);
 
-    snake.pop();
+    // snake.pop();
+
+    if (head.x === food.x && head.y === food.y) {
+        food = generateFood();
+        increaseSpeed();
+        clearInterval(gameInterval); // Clear Past Interval
+        gameInterval = setInterval(() => {
+            move();
+            // checkCollision();
+            draw();
+        }, gameSpeedDelay);
+    } else {
+        snake.pop();
+    }
+}
+
+// // Test Moving 
+// setInterval(() => {
+//     move(); // Move First
+//     draw(); // Then draw again new position
+// }, 200);
+
+// Start game function 
+function startGame() {
+    gameStarted = true; // Keep track of a running game 
+    instructionText.style.display = 'none';
+    logo.style.display = 'none';    
+    gameInterval = setInterval(() => {
+        move();     
+        // checkCollision();
+        draw();
+    }, gameSpeedDelay); 
+}
+
+// Keypress event listener
+function handleKeyPress(event) {
+    if(
+         (!gameStarted && event.code === 'Space') ||
+         (!gameStarted && event.key === '') 
+        ) {
+        startGame();
+    } else {
+        switch (event.key) {
+            case 'ArrowUp' :
+            direction = 'up';
+            break;
+            case 'ArrowDown' :
+            direction = 'down';
+            break;
+            case 'ArrowLeft' :
+            direction = 'left';
+            break;
+            case 'ArrowRight' :
+            direction = 'right';
+            break;
+        }
+    }
+}
+
+document.addEventListener('keydown', handleKeyPress);
+
+function increaseSpeed() {
+    // console.log(gameSpeedDelay);
+    if (gameSpeedDelay > 150) {
+        gameSpeedDelay -= 5;
+    }
 }

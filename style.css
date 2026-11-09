@@ -45,13 +45,18 @@ body, .snake {
 
 #instruction-text {
     position: absolute;
-    top: 60%;
-    color: #333;
-    width: 300px;
+    top: 70%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #c4cfac;
+    width: 400px;
+    box-sizing: border-box;
     text-align: center;
     text-transform: capitalize;
-    padding: 30px;
+    padding: 0;
     margin: 0;
+    font-size: 16px;
+    line-height: 2;
 }
 
 .scores {
@@ -79,6 +84,7 @@ body, .snake {
 }
 
 .snake {
+    background-color: #2b2b2b   ;
     border: #5a5a5a 1px dotted;
 }
 

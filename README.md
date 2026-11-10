@@ -4,6 +4,8 @@
 
 hey! I'm Adnan, and i made a snake game because just sitting down and waiting for you past two projects get passed t2 isn't that fun
 
+**UPDATE** Both passed the t2 and i got approval!!
+
 It's called **Shook Snake**, a retro style snake game I made using HTML, CSS,  and Javascript.
 
 nothing groundbreaking, just the classic nokia snake game with a little pixel art aesthetic.. and yes, the snake will die if you hit a wall (skill issue).
